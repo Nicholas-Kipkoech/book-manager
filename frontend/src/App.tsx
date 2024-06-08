@@ -1,35 +1,44 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import "./App.css";
+import { useQuery } from "@apollo/client";
+import { GET_BOOKS } from "./data/graphql-data";
+import { useEffect, useState } from "react";
+import BookComponent from "./components/BookComponent";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+export interface IBook {
+  author: string;
+  readingLevel: string;
+  title: string;
+  coverPhotoURL: string;
 }
 
-export default App
+function App() {
+  const { data, loading, error } = useQuery(GET_BOOKS);
+  const [books, setBooks] = useState<IBook[]>([]);
+
+  useEffect(() => {
+    if (data) {
+      setBooks(data.books);
+    }
+  }, [data]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
+  return (
+    <div className="App">
+      <div>
+        <div className="search-bar-container">
+          <div>Search bar</div>
+          <div>Search Results</div>
+        </div>
+        <div className="data-box">
+          {books.map((book, key) => (
+            <BookComponent book={book} key={key} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

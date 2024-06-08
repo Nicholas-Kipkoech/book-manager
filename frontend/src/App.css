@@ -1,1 +1,50 @@
+:root {
+  --steel-blue-primary: #335c6e;
+  --yellow-primary: #fabd33;
+  --turquoise-primary: #5acccc;
+  --turquoise-light-secondary: #cffafa;
+  --orange-secondary: #f76434;
+  --teal-secondary: #4aa088;
+  --yellow-dark-secondary: #faad00;
+  --turquoise-dark1-secondary: #53c2c2;
+  --orange-pastel-secondary: #ffe6dc;
+  --turquoise-dark2-secondary: #28b8b8;
+}
 
+* {
+  font-family: "Mulish";
+  background: var(--orange-pastel-secondary);
+}
+
+.App {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.data-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-items: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.book-box {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 300px;
+}
+
+.book-box img {
+  height: 250px;
+  width: 300px;
+}
+.book-title {
+  font-weight: 700;
+  font-size: 1rem;
+}
