@@ -4,6 +4,7 @@ import { GET_BOOKS } from "./data/graphql-data";
 import { useEffect, useState } from "react";
 import BookComponent from "./components/BookComponent";
 import SearchBar from "./components/SearchBar";
+import SearchResultsList from "./components/SearchResultsList";
 
 export interface IBook {
   author: string;
@@ -15,6 +16,7 @@ export interface IBook {
 function App() {
   const { data, loading, error } = useQuery(GET_BOOKS);
   const [books, setBooks] = useState<IBook[]>([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     if (data) {
@@ -22,6 +24,20 @@ function App() {
     }
   }, [data]);
 
+  /**
+   * Results returned into search container when a user types something.
+   */
+
+  const searchResults =
+    searchTerm.trim() === ""
+      ? [] // Return empty array if search term is empty
+      : books.filter((book) => {
+          const searchTermLower = searchTerm.toLowerCase().trim();
+          const bookTitleLower = book.title.toLowerCase().trim();
+          return bookTitleLower.includes(searchTermLower);
+        });
+
+  // process of data fetching...
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
@@ -29,8 +45,8 @@ function App() {
     <div className="App">
       <div>
         <div className="search-bar-container">
-          <SearchBar />
-          <div>Search Results</div>
+          <SearchBar searchQuery={searchTerm} setSearchQuery={setSearchTerm} />
+          <SearchResultsList results={searchResults} />
         </div>
         <div className="data-box">
           {books.map((book, key) => (
