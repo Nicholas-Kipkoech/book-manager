@@ -8,7 +8,11 @@ const SearchResultsList: React.FC<{ results: IBook[] }> = ({ results }) => {
       {results.length > 0 && (
         <div className="results-list">
           {results.map((result, key) => (
-            <SearchResult result={result} key={key} />
+            <SearchResult
+              coverPhotoURL={result.coverPhotoURL}
+              title={result.title}
+              key={key}
+            />
           ))}
         </div>
       )}

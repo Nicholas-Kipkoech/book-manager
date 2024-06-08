@@ -1,11 +1,11 @@
 import React from "react";
 import { IBook } from "../App";
 
-const SearchResult: React.FC<{ result: IBook }> = ({ result }) => {
+const SearchResult: React.FC<Partial<IBook>> = ({ coverPhotoURL, title }) => {
   return (
     <div className="search-result">
-      <img src={result.coverPhotoURL} height={30} width={30} />
-      <div>{result.title}</div>
+      <img src={coverPhotoURL} height={30} width={30} />
+      <div>{title}</div>
     </div>
   );
 };

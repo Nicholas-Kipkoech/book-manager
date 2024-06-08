@@ -12,11 +12,12 @@
 }
 body {
   background: var(--orange-pastel-secondary);
+  font-family: "Mulish";
 }
 
 .App {
   margin: 0px;
-  font-family: "Mulish";
+
   width: 100vw;
   padding: 20px;
   box-sizing: border-box;
@@ -24,6 +25,16 @@ body {
   flex-direction: column;
   align-items: center;
   position: relative;
+}
+
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.heading p {
+  font-size: 1.5rem;
+  font-weight: 800;
 }
 
 .data-box {
