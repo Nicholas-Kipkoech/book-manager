@@ -63,6 +63,9 @@ body {
   font-weight: 700;
   font-size: 1rem;
 }
+.book-author {
+  font-style: italic;
+}
 
 .search-bar-container {
   width: 100%;
@@ -126,4 +129,5 @@ input:focus {
 
 .search-result:hover {
   background-color: var(--turquoise-light-secondary);
+  cursor: pointer;
 }
