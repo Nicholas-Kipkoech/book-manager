@@ -6,7 +6,7 @@ const BookComponent: React.FC<{ book: IBook }> = ({ book }) => {
     <div className="book-box">
       <img src={`${book.coverPhotoURL}`} />
       <p className="book-title">{book.title}</p>
-      <p className="book-author">{book.author}</p>
+      <p className="book-author">Author: {book.author}</p>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_BOOKS } from "./data/graphql-data";
 import { useEffect, useState } from "react";
 import BookComponent from "./components/BookComponent";
+import SearchBar from "./components/SearchBar";
 
 export interface IBook {
   author: string;
@@ -28,7 +29,7 @@ function App() {
     <div className="App">
       <div>
         <div className="search-bar-container">
-          <div>Search bar</div>
+          <SearchBar />
           <div>Search Results</div>
         </div>
         <div className="data-box">
