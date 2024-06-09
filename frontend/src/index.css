@@ -31,6 +31,7 @@
     justify-items: center;
     align-items: center;
     gap: 1rem;
+    min-width: 100px;
     width: auto;
     margin-top: 2rem; /* To provide space for the search results */
   }
