@@ -6,9 +6,9 @@
  * @returns
  */
 
-export function debounce(func: (...args: any[]) => void, delay: number) {
+export function debounce<T>(func: (...args: T[]) => void, delay: number) {
   let timeout: number | null = null;
-  return (...args: any[]) => {
+  return (...args: T[]) => {
     if (timeout) {
       clearTimeout(timeout);
     }
