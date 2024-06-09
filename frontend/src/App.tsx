@@ -7,9 +7,8 @@ import BookComponent from './components/BookComponent'
 import SearchBar from './components/SearchBar'
 import SearchResultsList from './components/SearchResultsList'
 import { FcReading } from 'react-icons/fc'
-import { Badge } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useLocalStorage } from './hooks/useLocalstorage'
+import { Button } from '@mui/material'
 
 export interface IBook {
   author: string
@@ -20,15 +19,20 @@ export interface IBook {
 
 function App() {
   const { data, loading, error } = useQuery(GET_BOOKS)
-  const [readingList] = useLocalStorage<IBook[]>('readingList', [])
   const [books, setBooks] = useState<IBook[]>([])
   const [searchTerm, setSearchTerm] = useState('')
+  const [itemsPerPage, setItemsPerPage] = useState(9)
 
   useEffect(() => {
     if (data) {
       setBooks(data.books)
     }
   }, [data])
+
+  // loading more items on the page
+  function loadMoreItems() {
+    setItemsPerPage((prevItemsPerPage) => prevItemsPerPage + 9)
+  }
 
   /**
    * Results returned into search container when a user types something.
@@ -52,21 +56,39 @@ function App() {
       <div>
         <div className="heading">
           <p>FullStack Take Home Test</p>
-          <Badge color="primary" badgeContent={readingList.length}>
-            <Link to={'/reading-list'}>
-              <FcReading size={40} />
-            </Link>
-          </Badge>
+          <Link
+            to={'/reading-list'}
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <FcReading size={40} />
+            Reading List
+          </Link>
         </div>
         <div className="search-bar-container">
           <SearchBar searchQuery={searchTerm} setSearchQuery={setSearchTerm} />
           <SearchResultsList results={searchResults} />
         </div>
         <div className="data-box">
-          {books.map((book, key) => (
+          {books.slice(0, itemsPerPage).map((book, key) => (
             <BookComponent book={book} key={key} />
           ))}
         </div>
+        {books.length > itemsPerPage && (
+          <Button
+            onClick={loadMoreItems}
+            variant="contained"
+            style={{
+              background: ' #53c2c2',
+            }}
+            className="loadmore-btn"
+          >
+            Load More books
+          </Button>
+        )}
       </div>
     </div>
   )
