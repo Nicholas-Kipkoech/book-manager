@@ -1,14 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './App.css'
-import { useQuery } from '@apollo/client'
-import { GET_BOOKS } from './data/graphql-data'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import BookComponent from './components/BookComponent'
 import SearchBar from './components/SearchBar'
 import SearchResultsList from './components/SearchResultsList'
 import { FcReading } from 'react-icons/fc'
 import { Link } from 'react-router-dom'
 import { Button } from '@mui/material'
+import { BookContext } from './context/BookContext'
+import { GET_BOOKS } from './data/graphql-data'
+import { useQuery } from '@apollo/client'
 
 export interface IBook {
   author: string
@@ -18,10 +19,11 @@ export interface IBook {
 }
 
 function App() {
-  const { data, loading, error } = useQuery(GET_BOOKS)
-  const [books, setBooks] = useState<IBook[]>([])
+  const { books, setBooks } = useContext(BookContext)
   const [searchTerm, setSearchTerm] = useState('')
   const [itemsPerPage, setItemsPerPage] = useState(9)
+
+  const { data, loading, error } = useQuery(GET_BOOKS)
 
   useEffect(() => {
     if (data) {
@@ -49,21 +51,14 @@ function App() {
 
   // process of data fetching...
   if (loading) return <p>Loading...</p>
-  if (error) return <p>Error: {error.message}</p>
+  if (error) return <p>{error.message}</p>
 
   return (
     <div className="App">
       <div>
         <div className="heading">
           <p>FullStack Take Home Test</p>
-          <Link
-            to={'/reading-list'}
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
+          <Link to={'/reading-list'} className="readinglist-link">
             <FcReading size={40} />
             Reading List
           </Link>

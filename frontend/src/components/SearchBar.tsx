@@ -1,9 +1,9 @@
-import React from "react";
-import { FaSearch } from "react-icons/fa";
+import React from 'react'
+import { FaSearch } from 'react-icons/fa'
 
 interface SearchBarProps {
-  searchQuery: string;
-  setSearchQuery: (query: string) => void;
+  searchQuery: string
+  setSearchQuery: (query: string) => void
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -11,8 +11,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   setSearchQuery,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchQuery(e.target.value);
-  };
+    setSearchQuery(e.target.value)
+  }
   return (
     <div className="input-wrapper">
       <FaSearch id="search-icon" />
@@ -22,7 +22,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={handleChange}
       />
     </div>
-  );
-};
+  )
+}
 
-export default SearchBar;
+export default SearchBar
