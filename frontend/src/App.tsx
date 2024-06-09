@@ -9,6 +9,7 @@ import SearchResultsList from './components/SearchResultsList'
 import { FcReading } from 'react-icons/fc'
 import { Badge } from '@mui/material'
 import { Link } from 'react-router-dom'
+import { useLocalStorage } from './hooks/useLocalstorage'
 
 export interface IBook {
   author: string
@@ -19,6 +20,7 @@ export interface IBook {
 
 function App() {
   const { data, loading, error } = useQuery(GET_BOOKS)
+  const [readingList] = useLocalStorage<IBook[]>('readingList', [])
   const [books, setBooks] = useState<IBook[]>([])
   const [searchTerm, setSearchTerm] = useState('')
 
@@ -50,7 +52,7 @@ function App() {
       <div>
         <div className="heading">
           <p>FullStack Take Home Test</p>
-          <Badge color="primary" badgeContent={4}>
+          <Badge color="primary" badgeContent={readingList.length}>
             <Link to={'/reading-list'}>
               <FcReading size={40} />
             </Link>
