@@ -24,7 +24,11 @@ const SearchResult: React.FC<{
   }
 
   return (
-    <div className="search-result" onClick={() => handleSearch(book.title)}>
+    <div
+      className="search-result"
+      onClick={() => handleSearch(book.title)}
+      tabIndex={0}
+    >
       <img src={book.coverPhotoURL} height={30} width={30} />
       <div>{book.title}</div>
     </div>
