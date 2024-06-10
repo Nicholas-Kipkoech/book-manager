@@ -26,6 +26,7 @@ function App() {
   const { data, loading, error } = useQuery(GET_BOOKS)
 
   useEffect(() => {
+    //Initiate the data from our API into our usestate hook
     if (data) {
       setBooks(data.books)
     }

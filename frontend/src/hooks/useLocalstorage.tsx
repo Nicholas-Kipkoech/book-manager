@@ -10,9 +10,11 @@ function getSavedValue<T>(key: string, initialValue: T): T {
       console.error('Failed to parse localStorage value', error)
     }
   }
+  // If the instance of initial is a function then call it instead.
   if (initialValue instanceof Function) {
     return initialValue()
   }
+  //else return initial value as it is
   return initialValue
 }
 

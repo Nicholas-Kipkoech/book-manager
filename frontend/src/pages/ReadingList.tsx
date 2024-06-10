@@ -10,6 +10,10 @@ const CustomListComponent: React.FC<{
   book: IBook
   setReadingList: (list: IBook[]) => void
 }> = ({ book, setReadingList }) => {
+  /**
+   *
+   * @param book Book be passed so as to remove
+   */
   function removeBook(book: IBook) {
     const storedReadingList = JSON.parse(
       localStorage.getItem('readingList') || '[]',

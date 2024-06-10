@@ -7,6 +7,11 @@ const SearchResult: React.FC<{
 }> = ({ book }) => {
   const { setBooks, books } = useContext(BookContext)
 
+  /**
+   *
+   * @param title A book title which will be used as unique parameter for searching for a book
+   */
+
   function handleSearch(title: string) {
     if (!title || title.trim() === '') {
       // If title is empty or undefined, reset books to its original value

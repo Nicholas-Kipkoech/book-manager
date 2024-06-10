@@ -8,7 +8,7 @@ const BookComponent: React.FC<{ book: IBook }> = ({ book }) => {
     'readingList',
     [],
   )
-
+  // Check where the book is in the reading list array
   const isInList = readingList.some((item: IBook) => item.title === book.title)
 
   function addToReadingList(book: IBook) {
@@ -42,6 +42,7 @@ const BookComponent: React.FC<{ book: IBook }> = ({ book }) => {
     const updatedReadinglist = storedReadingList.filter(
       (item: IBook) => item.title !== book.title,
     )
+    // Update the current reading list after removing the book
     setReadingList(updatedReadinglist)
   }
 
